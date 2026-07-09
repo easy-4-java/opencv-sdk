@@ -20,7 +20,7 @@
 		<lombok.version>1.18.46</lombok.version>
 		<nd4j.version>1.0.0-beta4</nd4j.version>
 		<opencv-platform.version>4.1.0-1.5.1</opencv-platform.version>
-		<slf4j.version>2.0.18</slf4j.version>
+		<slf4j.version>2.1.0</slf4j.version>
 	</properties>
 
 	<dependencies>
