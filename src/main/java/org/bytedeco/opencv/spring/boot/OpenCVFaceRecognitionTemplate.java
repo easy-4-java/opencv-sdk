@@ -1,0 +1,187 @@
+/*
+ * Copyright (c) 2018, hiwepy (https://github.com/hiwepy).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package org.bytedeco.opencv.spring.boot;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.util.Objects;
+import java.util.UUID;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.bytedeco.opencv.global.opencv_core;
+import org.bytedeco.opencv.global.opencv_imgproc;
+import org.bytedeco.opencv.helper.opencv_imgcodecs;
+import org.bytedeco.opencv.opencv_core.CvHistogram;
+import org.bytedeco.opencv.opencv_core.IplImage;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Rect;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.objdetect.CascadeClassifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.alibaba.fastjson.JSONObject;
+
+/**
+ * OpenCV face detection and image comparison template.
+ *
+ * @author ： <a href="https://github.com/hiwepy">wandl</a>
+ */
+public class OpenCVFaceRecognitionTemplate {
+
+	private static final Logger log = LoggerFactory.getLogger(OpenCVFaceRecognitionTemplate.class);
+
+	private final CascadeClassifier faceDetector;
+	private final String tempDirectory;
+
+	public OpenCVFaceRecognitionTemplate(CascadeClassifier faceDetector, String tempDirectory) {
+		this.faceDetector = faceDetector;
+		this.tempDirectory = tempDirectory;
+	}
+
+	public void smooth(String path) {
+		IplImage image = opencv_imgcodecs.cvLoadImage(path);
+		if (Objects.nonNull(image)) {
+			opencv_imgproc.cvSmooth(image, image);
+			opencv_imgcodecs.cvSaveImage(path, image);
+			opencv_core.cvReleaseImage(image);
+		}
+	}
+
+	public JSONObject detect(String imagePath) {
+		return detect(new File(imagePath));
+	}
+
+	public JSONObject detect(byte[] imageBytes, String filename) throws Exception {
+		File imageFile = createTempImageFile(filename);
+		try (InputStream source = new ByteArrayInputStream(imageBytes)) {
+			FileUtils.copyInputStreamToFile(source, imageFile);
+			return detect(imageFile);
+		}
+	}
+
+	public JSONObject detect(File imageFile) {
+
+		JSONObject result = new JSONObject();
+
+		try {
+			log.info("人脸检测开始……");
+
+			if (Objects.isNull(imageFile) || !imageFile.exists()) {
+				result.put("error_code", 500);
+				result.put("error_msg", "");
+				return result;
+			}
+
+			Mat image = Imgcodecs.imread(imageFile.getPath());
+			MatOfRect faceDetections = new MatOfRect();
+			faceDetector.detectMultiScale(image, faceDetections);
+
+			Rect[] rects = faceDetections.toArray();
+			if (Objects.isNull(rects) || rects.length == 0 || rects.length > 1) {
+				return null;
+			}
+
+			log.info(String.format("检测到人脸： %s", rects.length));
+		} catch (Exception e) {
+			log.error("Face detection failed.", e);
+		}
+		return result;
+	}
+
+	public JSONObject match(String imagePath1, String imagePath2) {
+		return match(new File(imagePath1), new File(imagePath2));
+	}
+
+	public JSONObject match(byte[] imageBytes1, byte[] imageBytes2, String filename) throws Exception {
+		File imageFile1 = createTempImageFile(filename);
+		File imageFile2 = createTempImageFile(filename);
+		try (InputStream source1 = new ByteArrayInputStream(imageBytes1);
+				InputStream source2 = new ByteArrayInputStream(imageBytes2)) {
+			FileUtils.copyInputStreamToFile(source1, imageFile1);
+			FileUtils.copyInputStreamToFile(source2, imageFile2);
+			return match(imageFile1, imageFile2);
+		}
+	}
+
+	public JSONObject match(File imageFile1, File imageFile2) {
+
+		JSONObject result = new JSONObject();
+
+		try {
+			if (Objects.isNull(imageFile1) || !imageFile1.exists()) {
+				result.put("error_code", 500);
+				result.put("error_msg", "");
+				return result;
+			}
+
+			if (Objects.isNull(imageFile2) || !imageFile2.exists()) {
+				result.put("error_code", 500);
+				result.put("error_msg", "");
+				return result;
+			}
+
+			int lBins = 20;
+			int[] histSize = { lBins };
+
+			float[] vRanges = { 0, 100 };
+			float[][] ranges = { vRanges };
+
+			IplImage image1 = opencv_imgcodecs.cvLoadImage(imageFile1.getPath(), Imgcodecs.IMREAD_GRAYSCALE);
+			IplImage image2 = opencv_imgcodecs.cvLoadImage(imageFile2.getPath(), Imgcodecs.IMREAD_GRAYSCALE);
+
+			IplImage[] imageArr1 = { image1 };
+			IplImage[] imageArr2 = { image2 };
+
+			CvHistogram histogram1 = CvHistogram.create(1, histSize, Imgproc.HISTCMP_CORREL, ranges, 1);
+			CvHistogram histogram2 = CvHistogram.create(1, histSize, Imgproc.HISTCMP_CORREL, ranges, 1);
+
+			opencv_imgproc.cvCalcHist(imageArr1, histogram1, 0, null);
+			opencv_imgproc.cvCalcHist(imageArr2, histogram2, 0, null);
+
+			opencv_imgproc.cvNormalizeHist(histogram1, 100.0);
+			opencv_imgproc.cvNormalizeHist(histogram2, 100.0);
+
+			double score = opencv_imgproc.cvCompareHist(histogram1, histogram2, Imgproc.CV_COMP_CORREL);
+			result.put("score", score);
+		} catch (Exception e) {
+			log.error("Face comparison failed.", e);
+		}
+		return result;
+	}
+
+	private File createTempImageFile(String filename) {
+		File tempDir = new File(getTempDirectory());
+		if (!tempDir.exists()) {
+			tempDir.setReadable(true);
+			tempDir.setWritable(true);
+			tempDir.mkdir();
+		}
+		return new File(tempDir, UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(filename));
+	}
+
+	public CascadeClassifier getFaceDetector() {
+		return faceDetector;
+	}
+
+	public String getTempDirectory() {
+		return tempDirectory;
+	}
+}
