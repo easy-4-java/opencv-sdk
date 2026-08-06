@@ -2,6 +2,8 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
+[![Java](https://img.shields.io/badge/Java-21-orange)](https://github.com/easy-4-java/opencv-sdk) [![License](https://img.shields.io/badge/license-Apache%202.0-green)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+
 OpenCV + DeepLearning4j face detection / recognition toolkit: OpenCV face templates, ND4J matrix templates and FaceNet-based recognition
 [简体中文](./README.zh-CN.md)
 
