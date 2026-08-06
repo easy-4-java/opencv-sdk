@@ -2,6 +2,8 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
+[![Java](https://img.shields.io/badge/Java-8-orange)](https://github.com/easy-4-java/opencv-sdk) [![License](https://img.shields.io/badge/license-Apache%202.0-green)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+
 OpenCV + DeepLearning4j 人脸检测 / 识别工具包：OpenCV 人脸模板、ND4J 矩阵模板与 FaceNet 识别
 
 > **当前分支**：`feature/1.0.x`
