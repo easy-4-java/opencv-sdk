@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>io.github.easy4j</groupId>
@@ -12,108 +10,24 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
-		<commons-io.version>2.6</commons-io.version>
+		<commons-io.version>2.22.0</commons-io.version>
 		<datavec.version>1.0.0-beta4</datavec.version>
 		<dl4j.version>1.0.0-beta4</dl4j.version>
-		<fastjson.version>1.2.75</fastjson.version>
+		<fastjson.version>2.0.62</fastjson.version>
 		<guava.version>30.0-jre</guava.version>
 		<lombok.version>1.18.46</lombok.version>
 		<nd4j.version>1.0.0-beta4</nd4j.version>
 		<opencv-platform.version>4.1.0-1.5.1</opencv-platform.version>
-		<slf4j.version>2.1.0</slf4j.version>
-	</properties>
+		<slf4j.version>2.0.18</slf4j.version>
+	<maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version></properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons-io.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>${fastjson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.bytedeco</groupId>
-			<artifactId>opencv-platform</artifactId>
-			<version>${opencv-platform.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.deeplearning4j</groupId>
-			<artifactId>deeplearning4j-core</artifactId>
-			<version>${dl4j.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.nd4j</groupId>
-					<artifactId>nd4j-native</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.deeplearning4j</groupId>
-			<artifactId>deeplearning4j-zoo</artifactId>
-			<version>${dl4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.deeplearning4j</groupId>
-			<artifactId>deeplearning4j-modelimport</artifactId>
-			<version>${dl4j.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.nd4j</groupId>
-					<artifactId>nd4j-native</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.nd4j</groupId>
-			<artifactId>nd4j-api</artifactId>
-			<version>${nd4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.datavec</groupId>
-			<artifactId>datavec-data-image</artifactId>
-			<version>${datavec.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.nd4j</groupId>
-					<artifactId>nd4j-native</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
+	<dependencyManagement><dependencies><dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><version>${lombok.version}</version><scope>provided</scope></dependency><dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>${slf4j.version}</version></dependency><dependency><groupId>commons-io</groupId><artifactId>commons-io</artifactId><version>${commons-io.version}</version></dependency><dependency><groupId>com.alibaba</groupId><artifactId>fastjson</artifactId><version>${fastjson.version}</version></dependency><dependency><groupId>com.google.guava</groupId><artifactId>guava</artifactId><version>${guava.version}</version></dependency><dependency><groupId>org.bytedeco</groupId><artifactId>opencv-platform</artifactId><version>${opencv-platform.version}</version></dependency><dependency><groupId>org.deeplearning4j</groupId><artifactId>deeplearning4j-core</artifactId><version>${dl4j.version}</version><exclusions><exclusion><groupId>org.nd4j</groupId><artifactId>nd4j-native</artifactId></exclusion></exclusions></dependency><dependency><groupId>org.deeplearning4j</groupId><artifactId>deeplearning4j-zoo</artifactId><version>${dl4j.version}</version></dependency><dependency><groupId>org.deeplearning4j</groupId><artifactId>deeplearning4j-modelimport</artifactId><version>${dl4j.version}</version><exclusions><exclusion><groupId>org.nd4j</groupId><artifactId>nd4j-native</artifactId></exclusion></exclusions></dependency><dependency><groupId>org.nd4j</groupId><artifactId>nd4j-api</artifactId><version>${nd4j.version}</version></dependency><dependency><groupId>org.datavec</groupId><artifactId>datavec-data-image</artifactId><version>${datavec.version}</version><exclusions><exclusion><groupId>org.nd4j</groupId><artifactId>nd4j-native</artifactId></exclusion></exclusions></dependency></dependencies></dependencyManagement><dependencies><dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><scope>provided</scope></dependency><dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId></dependency><dependency><groupId>commons-io</groupId><artifactId>commons-io</artifactId></dependency><dependency><groupId>com.alibaba</groupId><artifactId>fastjson</artifactId></dependency><dependency><groupId>com.google.guava</groupId><artifactId>guava</artifactId></dependency><dependency><groupId>org.bytedeco</groupId><artifactId>opencv-platform</artifactId></dependency><dependency><groupId>org.deeplearning4j</groupId><artifactId>deeplearning4j-core</artifactId><exclusions><exclusion><groupId>org.nd4j</groupId><artifactId>nd4j-native</artifactId></exclusion></exclusions></dependency><dependency><groupId>org.deeplearning4j</groupId><artifactId>deeplearning4j-zoo</artifactId></dependency><dependency><groupId>org.deeplearning4j</groupId><artifactId>deeplearning4j-modelimport</artifactId><exclusions><exclusion><groupId>org.nd4j</groupId><artifactId>nd4j-native</artifactId></exclusion></exclusions></dependency><dependency><groupId>org.nd4j</groupId><artifactId>nd4j-api</artifactId></dependency><dependency><groupId>org.datavec</groupId><artifactId>datavec-data-image</artifactId><exclusions><exclusion><groupId>org.nd4j</groupId><artifactId>nd4j-native</artifactId></exclusion></exclusions></dependency></dependencies><build>
+		<pluginManagement><plugins><plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>${maven-compiler-plugin.version}</version><configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+			</plugin></plugins></pluginManagement></build>
     <distributionManagement>
         <repository>
             <id>2624322-release-6F6h6R</id>
