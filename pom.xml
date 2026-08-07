@@ -52,7 +52,7 @@
         <dl4j.version>1.0.0-beta4</dl4j.version>
         <!-- Dependency versions -->
         <fastjson.version>2.0.62</fastjson.version>
-        <guava.version>30.0-jre</guava.version>
+        <guava.version>33.6.0-jre</guava.version>
         <lombok.version>1.18.46</lombok.version>
         <nd4j.version>1.0.0-beta4</nd4j.version>
         <opencv-platform.version>4.1.0-1.5.1</opencv-platform.version>

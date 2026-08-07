@@ -49,7 +49,7 @@ public enum ImageLoader {
 	 * 250 by 250 pixel JPEG images most images are in color, although a few are
 	 * grayscale
 	 * 
-	 * @see org.bytedeco.opencv.spring.boot.nd4j.LFWLoader
+	 * 参考 LFW 数据集加载方式。
 	 */
 	LFW,
 	/**
