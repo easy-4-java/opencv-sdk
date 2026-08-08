@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2018, Loong Wan (https://github.com/loong10k).
+ * Copyright (c) 2018-present, easy-4-java (https://github.com/easy-4-java).
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.bytedeco.opencv.spring.boot.image;
 
@@ -27,15 +27,49 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 
+/**
+ * Utility class that converts decoded images into the SDK's normalised
+ * {@link ImageInfo} representation.
+ *
+ * <p>All entry points are {@code static}; the class is not meant to be
+ * instantiated. The conversion pipeline is intentionally simple:</p>
+ *
+ * <ol>
+ *     <li>Decode the source {@link File}, {@code byte[]} or {@link InputStream}
+ *         via {@link ImageIO}.</li>
+ *     <li>Crop the width and height down to a multiple of four so the result
+ *         is safe to feed to native code that requires 4-byte alignment.</li>
+ *     <li>Convert the pixel buffer to either 24-bit BGR or 8-bit grayscale
+ *         depending on the entry point.</li>
+ *     <li>Wrap the result in an {@link ImageInfo}.</li>
+ * </ol>
+ *
+ * <p>The class also exposes a {@link #getBestRect(int, int, Rect)} helper
+ * that grows (or shrinks) a face rectangle so that it sits comfortably
+ * inside the parent image bounds.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see ImageInfo
+ * @see ImageFormat
+ */
 public class ImageFactory {
 
 
+    /**
+     * Loads {@code file} and decodes it as a 24-bit BGR {@link ImageInfo}.
+     *
+     * @param file the image file to load; may be {@code null}.
+     * @return the decoded {@link ImageInfo} or {@code null} when the file is
+     *         {@code null}, the file cannot be read, or the underlying
+     *         {@link ImageIO} call throws.
+     */
     public static ImageInfo getRGBData(File file) {
         if (file == null)
             return null;
         ImageInfo imageInfo;
         try {
-            //将图片文件加载到内存缓冲区
+            //Decode the file into an in-memory BufferedImage.
             BufferedImage image = ImageIO.read(file);
             imageInfo = bufferedImage2ImageInfo(image);
         } catch (IOException e) {
@@ -45,12 +79,21 @@ public class ImageFactory {
         return imageInfo;
     }
 
+    /**
+     * Loads {@code file} and decodes it as an 8-bit grayscale
+     * {@link ImageInfo}.
+     *
+     * @param file the image file to load; may be {@code null}.
+     * @return the decoded {@link ImageInfo} or {@code null} when the file is
+     *         {@code null}, the file cannot be read, or the underlying
+     *         {@link ImageIO} call throws.
+     */
     public static ImageInfo getGrayData(File file) {
         if (file == null)
             return null;
         ImageInfo imageInfo;
         try {
-            //将图片文件加载到内存缓冲区
+            //Decode the file into an in-memory BufferedImage.
             BufferedImage image = ImageIO.read(file);
             imageInfo = bufferedImage2GrayImageInfo(image);
         } catch (IOException e) {
@@ -60,12 +103,30 @@ public class ImageFactory {
         return imageInfo;
     }
 
+    /**
+     * Convenience overload that wraps {@code bytes} in a
+     * {@link ByteArrayInputStream} before delegating to
+     * {@link #getRGBData(InputStream)}.
+     *
+     * @param bytes the encoded image bytes; may be {@code null}.
+     * @return the decoded {@link ImageInfo} or {@code null} when
+     *         {@code bytes} is {@code null}.
+     */
     public static ImageInfo getRGBData(byte[] bytes) {
         if (bytes == null)
             return null;
         return getRGBData(new ByteArrayInputStream(bytes));
     }
 
+    /**
+     * Convenience overload that wraps {@code bytes} in a
+     * {@link ByteArrayInputStream} before delegating to
+     * {@link #getGrayData(InputStream)}.
+     *
+     * @param bytes the encoded image bytes; may be {@code null}.
+     * @return the decoded {@link ImageInfo} or {@code null} when
+     *         {@code bytes} is {@code null}.
+     */
     public static ImageInfo getGrayData(byte[] bytes) {
         if (bytes == null)
             return null;
@@ -73,6 +134,21 @@ public class ImageFactory {
     }
 
 
+    /**
+     * Reads an image from {@code input} and decodes it as a 24-bit BGR
+     * {@link ImageInfo}.
+     *
+     * <p>The {@code input} stream is always closed in a {@code finally}
+     * block; any {@link IOException} raised while closing is silently
+     * swallowed to keep the public contract null-friendly.</p>
+     *
+     * @param input the source stream; may be {@code null}.
+     * @return the decoded {@link ImageInfo} or {@code null} when the input
+     *         is {@code null}, the image could not be decoded, or an
+     *         {@link IOException} occurred.
+     * @throws IOException never propagated; failures are surfaced as a
+     *         {@code null} return.
+     */
     public static ImageInfo getRGBData(InputStream input) {
         if (input == null)
             return null;
@@ -96,6 +172,21 @@ public class ImageFactory {
         return imageInfo;
     }
 
+    /**
+     * Reads an image from {@code input} and decodes it as an 8-bit
+     * grayscale {@link ImageInfo}.
+     *
+     * <p>The {@code input} stream is always closed in a {@code finally}
+     * block; any {@link IOException} raised while closing is silently
+     * swallowed to keep the public contract null-friendly.</p>
+     *
+     * @param input the source stream; may be {@code null}.
+     * @return the decoded {@link ImageInfo} or {@code null} when the input
+     *         is {@code null}, the image could not be decoded, or an
+     *         {@link IOException} occurred.
+     * @throws IOException never propagated; failures are surfaced as a
+     *         {@code null} return.
+     */
     public static ImageInfo getGrayData(InputStream input) {
         if (input == null)
             return null;
@@ -120,22 +211,35 @@ public class ImageFactory {
     }
 
 
+    /**
+     * Converts a {@link BufferedImage} into a 24-bit BGR {@link ImageInfo}.
+     *
+     * <p>Width and height are aligned down to a multiple of four so the
+     * result is safe to consume by native APIs that require 4-byte
+     * alignment. If the source image is not already
+     * {@link BufferedImage#TYPE_3BYTE_BGR}, it is converted through
+     * {@link ColorConvertOp} using a linear RGB {@link ColorSpace}.</p>
+     *
+     * @param image the decoded source image; must not be {@code null}.
+     * @return an {@link ImageInfo} carrying the BGR pixel buffer plus its
+     *         aligned dimensions.
+     */
     public static ImageInfo bufferedImage2ImageInfo(BufferedImage image) {
         ImageInfo imageInfo = new ImageInfo();
         int width = image.getWidth();
         int height = image.getHeight();
-        // 使图片居中
+        // Align dimensions to a multiple of four.
         width = width & (~3);
         height = height & (~3);
         imageInfo.setWidth(width);
         imageInfo.setHeight(height);
-        //根据原图片信息新建一个图片缓冲区
+        //Copy pixels into a fresh buffer of the same type as the source.
         BufferedImage resultImage = new BufferedImage(width, height, image.getType());
-        //得到原图的rgb像素矩阵
+        //Extract the ARGB pixel matrix from the source.
         int[] rgb = image.getRGB(0, 0, width, height, null, 0, width);
-        //将像素矩阵 绘制到新的图片缓冲区中
+        //Paint the extracted pixels back into the aligned buffer.
         resultImage.setRGB(0, 0, width, height, rgb, 0, width);
-        //进行数据格式化为可用数据
+        //Ensure the destination buffer is in BGR byte order.
         BufferedImage dstImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
         if (resultImage.getType() != BufferedImage.TYPE_3BYTE_BGR) {
             ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_LINEAR_RGB);
@@ -144,17 +248,29 @@ public class ImageFactory {
         } else {
             dstImage = resultImage;
         }
-        //获取rgb数据
+        //Expose the raw bytes and the pixel format.
         imageInfo.setImageFormat(ImageFormat.CP_PAF_BGR24);
         imageInfo.setImageData(((DataBufferByte) (dstImage.getRaster().getDataBuffer())).getData());
         return imageInfo;
     }
 
+    /**
+     * Converts a {@link BufferedImage} into an 8-bit grayscale
+     * {@link ImageInfo} by averaging the R/G/B channels per pixel.
+     *
+     * <p>Width and height are aligned down to a multiple of four. The
+     * grayscale conversion uses a fixed-point approximation of the BT.601
+     * luma formula ({@code 66 * R + 129 * G + 25 * B + 128 >> 8 + 16}).</p>
+     *
+     * @param image the decoded source image; must not be {@code null}.
+     * @return an {@link ImageInfo} carrying the grayscale byte buffer plus
+     *         its aligned dimensions.
+     */
     public static ImageInfo bufferedImage2GrayImageInfo(BufferedImage image) {
         ImageInfo imageInfo = new ImageInfo();
         int width = image.getWidth();
         int height = image.getHeight();
-        // 使图片居中
+        // Align dimensions to a multiple of four.
         width = width & (~3);
         height = height & (~3);
         imageInfo.setWidth(width);
@@ -168,6 +284,16 @@ public class ImageFactory {
     }
 
 
+    /**
+     * Converts an ARGB pixel matrix into an 8-bit grayscale byte buffer
+     * using a fixed-point BT.601 approximation.
+     *
+     * @param argb   the source pixel matrix in {@code ARGB} packed-int form.
+     * @param width  the number of columns to convert.
+     * @param height the number of rows to convert.
+     * @return a freshly allocated {@code width * height} byte buffer
+     *         containing the grayscale pixels.
+     */
     private static byte[] rgbToGray(int[] argb, int width, int height) {
 
         int yIndex = 0;
@@ -190,12 +316,21 @@ public class ImageFactory {
 
 
     /**
-     * 将图像中需要截取的Rect向外扩张一倍，若扩张一倍会溢出，则扩张到边界，若Rect已溢出，则收缩到边界
+     * Expands (or contracts) {@code srcRect} so that it sits comfortably
+     * inside an image of size {@code (width, height)}.
      *
-     * @param width   图像宽度
-     * @param height  图像高度
-     * @param srcRect 原Rect
-     * @return 调整后的Rect
+     * <p>If any edge of the source rectangle already overflows the image
+     * bounds, the rectangle is shrunk toward the centre by the worst-case
+     * overflow. Otherwise the rectangle is grown outward by half its
+     * height; if that would overflow, the padding is reduced to the
+     * smallest of the four margins.</p>
+     *
+     * @param width   the parent image width.
+     * @param height  the parent image height.
+     * @param srcRect the original rectangle; may be {@code null}.
+     * @return a new rectangle centred on the original one and clipped to
+     *         the parent bounds, or {@code null} when {@code srcRect} is
+     *         {@code null}.
      */
     public static Rect getBestRect(int width, int height, Rect srcRect) {
         if (srcRect == null) {
@@ -203,7 +338,7 @@ public class ImageFactory {
         }
         Rect rect = new Rect(srcRect);
         int maxOverFlow = Math.max(-rect.left, Math.min(-rect.top, Math.min(width - rect.right, height - rect.bottom)));
-        // 原rect边界已溢出宽高的情况
+        // The rectangle overflows the parent bounds: shrink it.
         if (maxOverFlow > 0) {
             rect.left += maxOverFlow;
             rect.top += maxOverFlow;
@@ -211,9 +346,9 @@ public class ImageFactory {
             rect.bottom -= maxOverFlow;
             return rect;
         }
-        // 原rect边界未溢出宽高的情况
+        // The rectangle fits inside the parent: expand it by half its height.
         int padding = (rect.bottom - rect.top) / 2;
-        // 若以此padding扩张rect会溢出，取最大padding为四个边距的最小值
+        // If the naive padding overflows, shrink it to the smallest margin.
         if (!(rect.left - padding > 0
                 && rect.right + padding < width
                 && rect.top - padding > 0
