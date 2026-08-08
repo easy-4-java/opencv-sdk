@@ -372,6 +372,74 @@ class ImageFactoryTest {
     }
 
     /**
+     * Verifies that {@link ImageFactory#getRGBData(InputStream)} returns
+     * {@code null} when the stream throws {@link IOException} on read.
+     */
+    @Test
+    void shouldReturnNullWhenRgbInputStreamThrowsOnRead() {
+        InputStream throwing = new InputStream() {
+            @Override
+            public int read() throws IOException {
+                throw new IOException("simulated read failure");
+            }
+        };
+
+        assertNull(ImageFactory.getRGBData(throwing));
+    }
+
+    /**
+     * Verifies that {@link ImageFactory#getGrayData(InputStream)} returns
+     * {@code null} when the stream throws {@link IOException} on read.
+     */
+    @Test
+    void shouldReturnNullWhenGrayInputStreamThrowsOnRead() {
+        InputStream throwing = new InputStream() {
+            @Override
+            public int read() throws IOException {
+                throw new IOException("simulated read failure");
+            }
+        };
+
+        assertNull(ImageFactory.getGrayData(throwing));
+    }
+
+    /**
+     * Verifies that {@link ImageFactory#getRGBData(InputStream)} handles
+     * an {@link IOException} thrown during {@code close()} gracefully.
+     */
+    @Test
+    void shouldHandleCloseIOExceptionForRgb() throws IOException {
+        byte[] bytes = encodePng(solidImage(8, BufferedImage.TYPE_INT_RGB, 0xFF00FF));
+        InputStream throwingClose = new ByteArrayInputStream(bytes) {
+            @Override
+            public void close() throws IOException {
+                throw new IOException("simulated close failure");
+            }
+        };
+
+        // Should not throw; the close exception is swallowed.
+        ImageFactory.getRGBData(throwingClose);
+    }
+
+    /**
+     * Verifies that {@link ImageFactory#getGrayData(InputStream)} handles
+     * an {@link IOException} thrown during {@code close()} gracefully.
+     */
+    @Test
+    void shouldHandleCloseIOExceptionForGray() throws IOException {
+        byte[] bytes = encodePng(solidImage(8, BufferedImage.TYPE_INT_RGB, 0x808080));
+        InputStream throwingClose = new ByteArrayInputStream(bytes) {
+            @Override
+            public void close() throws IOException {
+                throw new IOException("simulated close failure");
+            }
+        };
+
+        // Should not throw; the close exception is swallowed.
+        ImageFactory.getGrayData(throwingClose);
+    }
+
+    /**
      * Simple delegating {@link InputStream} that remembers whether
      * {@link #close()} has been invoked. Used to assert that the
      * factory closes its inputs.
