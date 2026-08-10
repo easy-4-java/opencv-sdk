@@ -39,27 +39,29 @@
 
     
     <properties>
-                <junit-jupiter.version>6.1.0</junit-jupiter.version>
-<maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
-        
-        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>21</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Dependency versions -->
         <commons-io.version>2.22.0</commons-io.version>
         <datavec.version>1.0.0-beta4</datavec.version>
         <dl4j.version>1.0.0-beta4</dl4j.version>
-        
         <fastjson.version>2.0.62</fastjson.version>
         <guava.version>33.6.0-jre</guava.version>
+        <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <lombok.version>1.18.46</lombok.version>
         <nd4j.version>1.0.0-beta4</nd4j.version>
         <opencv-platform.version>4.1.0-1.5.1</opencv-platform.version>
         <slf4j.version>2.0.18</slf4j.version>
+        <!-- Maven Plugin versions -->
+        <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
         <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
-    <maven.compiler.release>${java.version}</maven.compiler.release></properties>
+        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+    </properties>
+
 
     
     <dependencyManagement>
