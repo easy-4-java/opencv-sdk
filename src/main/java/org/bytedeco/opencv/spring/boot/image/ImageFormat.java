@@ -37,7 +37,7 @@ package org.bytedeco.opencv.spring.boot.image;
  *     <li>{@link #CP_PAF_DEPTH_U16} &mdash; 16-bit unsigned depth map.</li>
  * </ul>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see ImageInfo
  * @see ImageFactory

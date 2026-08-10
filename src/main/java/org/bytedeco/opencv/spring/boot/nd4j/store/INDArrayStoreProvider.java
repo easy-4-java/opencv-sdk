@@ -29,7 +29,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
  * {@code (group, memberId)} pair; the {@link INDArray} value is the
  * embedding produced by the FaceNet-style model.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see INDArrayLocalCacheStoreProvider
  * @see INDArrayInfo

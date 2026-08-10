@@ -67,7 +67,7 @@ import com.alibaba.fastjson.JSONObject;
  * {@code error_code = 500} (for detection) or as an empty result (for
  * matching). The template never throws to its caller.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see CascadeClassifier
  * @see Imgcodecs

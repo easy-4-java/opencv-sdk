@@ -39,7 +39,7 @@ import com.google.common.cache.RemovalNotification;
  * {@link Optional#absent()} on lookup misses; this allows {@link #get} to
  * distinguish a hit from a miss without falling back to {@code null}.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see INDArrayStoreProvider
  * @see LoadingCache

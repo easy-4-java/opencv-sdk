@@ -48,7 +48,7 @@ import javax.imageio.ImageIO;
  * that grows (or shrinks) a face rectangle so that it sits comfortably
  * inside the parent image bounds.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see ImageInfo
  * @see ImageFormat

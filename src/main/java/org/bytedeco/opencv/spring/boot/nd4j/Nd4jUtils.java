@@ -30,7 +30,7 @@ import org.nd4j.linalg.indexing.NDArrayIndex;
  * {@link #distance(INDArray, INDArray)} returns the squared Euclidean
  * distance between two equally-shaped tensors.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see Nd4jTemplate
  */

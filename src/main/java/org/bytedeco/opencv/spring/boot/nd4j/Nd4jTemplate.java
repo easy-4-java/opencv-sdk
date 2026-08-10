@@ -46,7 +46,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
  * tpl.faceNew("employees", "42", imageFile);
  * }</pre>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see Nd4jUtils
  * @see INDArrayStoreProvider

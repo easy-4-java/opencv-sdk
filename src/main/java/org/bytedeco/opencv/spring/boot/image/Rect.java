@@ -29,7 +29,7 @@ package org.bytedeco.opencv.spring.boot.image;
  * individual edge coordinates or the copy constructor that deep-copies
  * another {@code Rect}.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see ImageFactory#getBestRect(int, int, Rect)
  */

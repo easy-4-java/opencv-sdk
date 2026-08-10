@@ -45,7 +45,7 @@ import org.nd4j.linalg.learning.config.Adam;
  * pre-trained weights. Callers typically {@link #init() initialise} the
  * graph after loading weights from disk or after training.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see ComputationGraph
  * @see Nd4jTemplate
