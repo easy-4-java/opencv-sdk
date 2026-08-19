@@ -7,21 +7,18 @@
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
     <version>3.0.x.20260630-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
-
     <scm>
         <connection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</connection>
         <developerConnection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</developerConnection>
         <url>https://github.com/easy-4-java/${project.artifactId}</url>
         <tag>${project.artifactId}</tag>
     </scm>
-
     <developers>
         <developer>
             <name>Loong Wan</name>
@@ -33,9 +30,9 @@
             <timezone>+8</timezone>
         </developer>
     </developers>
-
     <properties>
         <maven.version>4.0.0-rc-5</maven.version>
+        <!-- ═══ 第一段: 基础属性（自然排序）═══ -->
         <java.version>21</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -58,47 +55,39 @@
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
     </properties>
-
     <dependencyManagement>
         <dependencies>
-
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.bytedeco</groupId>
                 <artifactId>opencv-platform</artifactId>
                 <version>${opencv-platform.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.deeplearning4j</groupId>
                 <artifactId>deeplearning4j-core</artifactId>
@@ -110,13 +99,11 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
             <dependency>
                 <groupId>org.deeplearning4j</groupId>
                 <artifactId>deeplearning4j-zoo</artifactId>
                 <version>${dl4j.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.deeplearning4j</groupId>
                 <artifactId>deeplearning4j-modelimport</artifactId>
@@ -128,13 +115,11 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
             <dependency>
                 <groupId>org.nd4j</groupId>
                 <artifactId>nd4j-api</artifactId>
                 <version>${nd4j.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.datavec</groupId>
                 <artifactId>datavec-data-image</artifactId>
@@ -148,54 +133,44 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <dependencies>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>opencv-platform</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-core</artifactId>
@@ -206,12 +181,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-zoo</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-modelimport</artifactId>
@@ -222,12 +195,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.nd4j</groupId>
             <artifactId>nd4j-api</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.datavec</groupId>
             <artifactId>datavec-data-image</artifactId>
@@ -239,28 +210,32 @@
             </exclusions>
         </dependency>
     </dependencies>
-
+    <distributionManagement>
+        <repository>
+            <id>2624322-release-6F6h6R</id>
+            <url>https://packages.aliyun.com/6927b116e6c3e0425dbdf60d/maven/2624322-release-6f6h6r</url>
+        </repository>
+        <snapshotRepository>
+            <id>2624322-snapshot-3EoOv3</id>
+            <url>https://packages.aliyun.com/6927b116e6c3e0425dbdf60d/maven/2624322-snapshot-3eoov3</url>
+        </snapshotRepository>
+    </distributionManagement>
     <build>
         <pluginManagement>
             <plugins>
-
                 <plugin>
-
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <release>${java.version}</release>
-
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
-
             <plugin>
-
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${maven-jacoco-plugin.version}</version>
@@ -302,18 +277,14 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
-
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <release>${java.version}</release>
-
                     <parameters>true</parameters>
                     <encoding>${project.build.sourceEncoding}</encoding>
-
                     <maxmem>512M</maxmem>
                     <annotationProcessorPaths>
                         <path>
@@ -324,9 +295,7 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-
             <plugin>
-
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
@@ -343,9 +312,7 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
-
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>${maven-source-plugin.version}</version>
@@ -360,27 +327,12 @@
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>2624322-release-6F6h6R</id>
-            <url>https://packages.aliyun.com/6927b116e6c3e0425dbdf60d/maven/2624322-release-6f6h6r</url>
-        </repository>
-        <snapshotRepository>
-            <id>2624322-snapshot-3EoOv3</id>
-            <url>https://packages.aliyun.com/6927b116e6c3e0425dbdf60d/maven/2624322-snapshot-3eoov3</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <profiles>
-
         <profile>
             <id>central</id>
             <build>
                 <plugins>
-
                     <plugin>
-
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>${maven-gpg-plugin.version}</version>
@@ -394,9 +346,7 @@
                             </execution>
                         </executions>
                     </plugin>
-
                     <plugin>
-
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
                         <version>${maven-central-publishing-plugin.version}</version>
