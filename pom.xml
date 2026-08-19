@@ -7,7 +7,6 @@
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
     <version>2.0.x.20260630-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <!-- 开源协议采用 Apache 2.0 协议 -->
     <licenses>
         <license>
@@ -15,7 +14,6 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
-
     <!-- 源码仓库（SCM）信息 -->
     <scm>
         <connection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</connection>
@@ -23,7 +21,6 @@
         <url>https://github.com/easy-4-java/${project.artifactId}</url>
         <tag>${project.artifactId}</tag>
     </scm>
-
     <!-- 开发者信息 -->
     <developers>
         <developer>
@@ -36,15 +33,12 @@
             <timezone>+8</timezone>
         </developer>
     </developers>
-
     <properties>
         <!-- ═══ 第一段: 基础属性（自然排序）═══ -->
         <java.version>17</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <maven.version>4.0.0-rc-5</maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-
         <!-- Dependency versions -->
         <commons-io.version>2.22.0</commons-io.version>
         <datavec.version>1.0.0-beta4</datavec.version>
@@ -63,9 +57,7 @@
         <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-    
     </properties>
-
     <dependencyManagement>
         <dependencies>
             <!-- For Lombok -->
@@ -155,7 +147,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <dependencies>
         <!-- For Lombok -->
         <dependency>
@@ -232,7 +223,6 @@
             </exclusions>
         </dependency>
     </dependencies>
-
     <distributionManagement>
         <repository>
             <id>2624322-release-6F6h6R</id>
@@ -243,11 +233,9 @@
             <url>https://packages.aliyun.com/6927b116e6c3e0425dbdf60d/maven/2624322-snapshot-3eoov3</url>
         </snapshotRepository>
     </distributionManagement>
-
     <build>
         <pluginManagement>
             <plugins>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
                 <plugin>
                     <!-- 编译插件：编译主代码至主输出目录 -->
@@ -262,7 +250,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-
             <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
             <plugin>
                 <!-- 覆盖率插件：生成覆盖率报告并校验测试覆盖率（目标 90%） -->
@@ -307,7 +294,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
             <plugin>
                 <!-- 编译插件：编译主代码至主输出目录 -->
@@ -329,7 +315,6 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-
             <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
             <plugin>
                 <!-- 文档插件：发布时自动生成 Javadoc 并发布 -->
@@ -349,7 +334,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
             <plugin>
                 <!-- 源码插件：发布时自动将源码同时发布 -->
@@ -367,15 +351,12 @@
             </plugin>
         </plugins>
     </build>
-
     <profiles>
         <!-- 发布到 Maven Central Portal：mvn -Pcentral deploy（GPG 签名 + 源码 + Javadoc + Central 发布插件） -->
-
         <profile>
             <id>central</id>
             <build>
                 <plugins>
-
                     <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
                     <plugin>
                         <!-- 签名插件：对制品进行 PGP 签名 -->
@@ -392,7 +373,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
                     <!-- https://mvnrepository.com/artifact/org.sonatype.central/central-publishing-maven-plugin -->
                     <plugin>
                         <!-- 发布插件：将制品发布到 Maven Central Portal -->
@@ -410,5 +390,4 @@
             </build>
         </profile>
     </profiles>
-
 </project>
