@@ -41,7 +41,7 @@
         <maven.version>3.9.16</maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Dependency versions -->
-        <commons-io.version>2.20.0</commons-io.version>
+        <commons-io.version>2.22.0</commons-io.version>
         <datavec.version>1.0.0-beta4</datavec.version>
         <dl4j.version>1.0.0-beta4</dl4j.version>
         <fastjson.version>2.0.62</fastjson.version>
