@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
     <modelVersion>4.1.0</modelVersion>
     <groupId>io.github.easy4j</groupId>
     <artifactId>opencv-sdk</artifactId>
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
-    <version>2.0.x.20260630-SNAPSHOT</version>
+    <version>3.0.x.20260630-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <!-- 开源协议采用 Apache 2.0 协议 -->
+    
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
-    <!-- 源码仓库（SCM）信息 -->
+    
     <scm>
         <connection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</connection>
         <developerConnection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</developerConnection>
         <url>https://github.com/easy-4-java/${project.artifactId}</url>
         <tag>${project.artifactId}</tag>
     </scm>
-    <!-- 开发者信息 -->
+    
     <developers>
         <developer>
             <name>Loong Wan</name>
@@ -34,12 +34,12 @@
         </developer>
     </developers>
     <properties>
-        <!-- ═══ 第一段: 基础属性（自然排序）═══ -->
-        <java.version>17</java.version>
+        
+        <java.version>21</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <maven.version>4.0.0-rc-5</maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Dependency versions -->
+        
         <commons-io.version>2.22.0</commons-io.version>
         <datavec.version>1.0.0-beta4</datavec.version>
         <dl4j.version>1.0.0-beta4</dl4j.version>
@@ -50,7 +50,7 @@
         <nd4j.version>1.0.0-beta4</nd4j.version>
         <opencv-platform.version>4.1.0-1.5.1</opencv-platform.version>
         <slf4j.version>2.0.18</slf4j.version>
-        <!-- Maven Plugin versions -->
+        
         <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
@@ -60,44 +60,44 @@
     </properties>
     <dependencyManagement>
         <dependencies>
-            <!-- For Lombok -->
+            
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
-            <!-- For Slf4j -->
+            
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-            <!-- For Commons IO -->
+            
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
             </dependency>
-            <!-- For Fastjson -->
+            
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
-            <!-- For Guava -->
+            
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
-            <!-- For OpenCV -->
+            
             <dependency>
                 <groupId>org.bytedeco</groupId>
                 <artifactId>opencv-platform</artifactId>
                 <version>${opencv-platform.version}</version>
             </dependency>
-            <!-- For Deeplearning4j -->
+            
             <dependency>
                 <groupId>org.deeplearning4j</groupId>
                 <artifactId>deeplearning4j-core</artifactId>
@@ -109,13 +109,13 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.deeplearning4j/deeplearning4j-zoo -->
+            
             <dependency>
                 <groupId>org.deeplearning4j</groupId>
                 <artifactId>deeplearning4j-zoo</artifactId>
                 <version>${dl4j.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.deeplearning4j/deeplearning4j-modelimport -->
+            
             <dependency>
                 <groupId>org.deeplearning4j</groupId>
                 <artifactId>deeplearning4j-modelimport</artifactId>
@@ -127,13 +127,13 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.nd4j/nd4j-api -->
+            
             <dependency>
                 <groupId>org.nd4j</groupId>
                 <artifactId>nd4j-api</artifactId>
                 <version>${nd4j.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.datavec/datavec-data-image -->
+            
             <dependency>
                 <groupId>org.datavec</groupId>
                 <artifactId>datavec-data-image</artifactId>
@@ -148,38 +148,38 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
-        <!-- For Lombok -->
+        
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- For Slf4j -->
+        
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-        <!-- For Commons IO -->
+        
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-        <!-- For Fastjson -->
+        
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
-        <!-- For Guava -->
+        
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
-        <!-- For OpenCV -->
+        
         <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>opencv-platform</artifactId>
         </dependency>
-        <!-- For Deeplearning4j -->
+        
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-core</artifactId>
@@ -190,12 +190,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.deeplearning4j/deeplearning4j-zoo -->
+        
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-zoo</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.deeplearning4j/deeplearning4j-modelimport -->
+        
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-modelimport</artifactId>
@@ -206,12 +206,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.nd4j/nd4j-api -->
+        
         <dependency>
             <groupId>org.nd4j</groupId>
             <artifactId>nd4j-api</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.datavec/datavec-data-image -->
+        
         <dependency>
             <groupId>org.datavec</groupId>
             <artifactId>datavec-data-image</artifactId>
@@ -236,23 +236,23 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+                
                 <plugin>
-                    <!-- 编译插件：编译主代码至主输出目录 -->
+                    
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
-                        <!-- 字符集编码 -->
+                        
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
-            <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+            
             <plugin>
-                <!-- 覆盖率插件：生成覆盖率报告并校验测试覆盖率（目标 90%） -->
+                
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${maven-jacoco-plugin.version}</version>
@@ -294,17 +294,17 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+            
             <plugin>
-                <!-- 编译插件：编译主代码至主输出目录 -->
+                
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <!-- 保留方法参数名，支持 Spring MVC 按参数名绑定 -->
+                    
                     <parameters>true</parameters>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <!-- 编译最大内存 -->
+                    
                     <maxmem>512M</maxmem>
                     <annotationProcessorPaths>
                         <path>
@@ -315,9 +315,9 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
+            
             <plugin>
-                <!-- 文档插件：发布时自动生成 Javadoc 并发布 -->
+                
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
@@ -334,9 +334,9 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
+            
             <plugin>
-                <!-- 源码插件：发布时自动将源码同时发布 -->
+                
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>${maven-source-plugin.version}</version>
@@ -352,14 +352,14 @@
         </plugins>
     </build>
     <profiles>
-        <!-- 发布到 Maven Central Portal：mvn -Pcentral deploy（GPG 签名 + 源码 + Javadoc + Central 发布插件） -->
+        
         <profile>
             <id>central</id>
             <build>
                 <plugins>
-                    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
+                    
                     <plugin>
-                        <!-- 签名插件：对制品进行 PGP 签名 -->
+                        
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>${maven-gpg-plugin.version}</version>
@@ -373,9 +373,9 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!-- https://mvnrepository.com/artifact/org.sonatype.central/central-publishing-maven-plugin -->
+                    
                     <plugin>
-                        <!-- 发布插件：将制品发布到 Maven Central Portal -->
+                        
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
                         <version>${maven-central-publishing-plugin.version}</version>
