@@ -21,8 +21,7 @@ import lombok.Data;
  * Immutable-style value object describing a single decoded image.
  *
  * <p>An {@code ImageInfo} bundles the raw pixel bytes together with the
- * {@link #getWidth() width}, {@link #getHeight() height} and the originating
- * {@link #getImageFormat() pixel format}. It is the canonical output of
+ * width, height and the originating pixel format. It is the canonical output of
  * {@link ImageFactory} and the canonical input to consumers such as ND4J
  * tensors or OpenCV {@code Mat} objects.</p>
  *
@@ -40,7 +39,7 @@ public class ImageInfo {
 
     /**
      * Raw pixel bytes for the image, in the row-major order expected by the
-     * accompanying {@link #getImageFormat() format}. For
+     * accompanying pixel format. For
      * {@link ImageFormat#CP_PAF_BGR24} each pixel is encoded as three bytes
      * (B, G, R); for {@link ImageFormat#CP_PAF_GRAY} each pixel is a single
      * byte. May be {@code null} until the buffer has been populated.
@@ -61,7 +60,7 @@ public class ImageInfo {
     private Integer height;
 
     /**
-     * Pixel layout used by {@link #getImageData()}. Determines how the byte
+     * Pixel layout used by the image data. Determines how the byte
      * array should be interpreted by downstream consumers.
      */
     private ImageFormat imageFormat;

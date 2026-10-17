@@ -48,7 +48,7 @@ import org.nd4j.linalg.learning.config.Adam;
  * @author [@Loong Wan](https://github.com/loong10k)
  * @since 3.0.0
  * @see ComputationGraph
- * @see Nd4jTemplate
+ * @see org.bytedeco.opencv.spring.boot.nd4j.Nd4jTemplate
  */
 public class FaceNetSmallV2Model {
 

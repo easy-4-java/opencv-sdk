@@ -146,8 +146,6 @@ public class ImageFactory {
      * @return the decoded {@link ImageInfo} or {@code null} when the input
      *         is {@code null}, the image could not be decoded, or an
      *         {@link IOException} occurred.
-     * @throws IOException never propagated; failures are surfaced as a
-     *         {@code null} return.
      */
     public static ImageInfo getRGBData(InputStream input) {
         if (input == null)
@@ -184,8 +182,6 @@ public class ImageFactory {
      * @return the decoded {@link ImageInfo} or {@code null} when the input
      *         is {@code null}, the image could not be decoded, or an
      *         {@link IOException} occurred.
-     * @throws IOException never propagated; failures are surfaced as a
-     *         {@code null} return.
      */
     public static ImageInfo getGrayData(InputStream input) {
         if (input == null)
