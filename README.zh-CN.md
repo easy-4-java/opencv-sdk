@@ -7,8 +7,8 @@
 OpenCV + DeepLearning4j 人脸检测 / 识别工具包：OpenCV 人脸模板、ND4J 矩阵模板与 FaceNet 识别
 
 > **当前分支**：`feature/2.0.x`
-> **版本**：`2.0.x.x.20260630-SNAPSHOT`
-> **JDK 基线**：8
+> **版本**：`2.0.x.20260630-SNAPSHOT`
+> **JDK 基线**：17
 > **项目状态**：实验性（首个公开版本）。尚未发布 Maven Central；制品通过 Aliyun Maven 仓库与 GitHub Releases 分发。
 
 ## 目录
@@ -29,7 +29,7 @@ OpenCV + DeepLearning4j 人脸检测 / 识别工具包：OpenCV 人脸模板、N
 
 ### 1.1 是什么
 
-**opencv-sdk** 是整合 OpenCV（JavaCPP `opencv-platform`）与 DeepLearning4j（DL4J）的 Java 工具包：提供基于 OpenCV 的人脸检测与比对模板、ND4J 矩阵转换与存储，以及面向人脸识别流程的 FaceNet-small 模型。目标场景是 Spring Boot 应用中常见的图像处理与人脸识别功能（包命名遵循 `org.bytedeco.opencv.spring.boot` 约定；1.0.x 模块本身的 POM 不含 Spring 依赖）。
+**opencv-sdk** 是整合 OpenCV（JavaCPP `opencv-platform`）与 DeepLearning4j（DL4J）的 Java 工具包：提供基于 OpenCV 的人脸检测与比对模板、ND4J 矩阵转换与存储，以及面向人脸识别流程的 FaceNet-small 模型。目标场景是 Spring Boot 应用中常见的图像处理与人脸识别功能（包命名遵循 `org.bytedeco.opencv.spring.boot` 约定；2.0.x 模块本身的 POM 不含 Spring 依赖）。
 
 ### 1.2 不是什么
 
@@ -66,7 +66,7 @@ OpenCV + DeepLearning4j 人脸检测 / 识别工具包：OpenCV 人脸模板、N
 
 | 组件 | 版本 | 说明 |
 |---|---:|---|
-| JDK | 17+ | 1.0.x 线基线 |
+| JDK | 17+ | 2.0.x 线基线 |
 | opencv-platform（JavaCPP） | 4.1.0-1.5.1 | 按平台解析原生 OpenCV 二进制 |
 | DeepLearning4j core / zoo / modelimport | 1.0.0-beta4 | 模型与导入 |
 | ND4J api + native | 1.0.0-beta4 | 矩阵运算（`nd4j-native`） |
@@ -80,8 +80,8 @@ OpenCV + DeepLearning4j 人脸检测 / 识别工具包：OpenCV 人脸模板、N
 
 | 版本线 | 分支 | JDK | 版本模式 | 用途 |
 |---|---|---:|---|---|
-| 1.0.x | `feature/2.0.x`（当前分支） | 8 | `1.0.x.*` | 存量项目、Boot 2.x Starter 线 |
-| 2.0.x | `feature/2.0.x` | 17 | `2.0.x.*` | JDK 17 线 |
+| 1.0.x | `feature/1.0.x` | 8 | `1.0.x.*` | 存量项目、Boot 2.x Starter 线 |
+| 2.0.x | `feature/2.0.x`（当前分支） | 17 | `2.0.x.*` | JDK 17 线 |
 | 3.0.x | `feature/3.0.x` | 21 | `3.0.x.*` | 新项目 |
 
 <a id="4-architecture--modules"></a>
@@ -129,14 +129,14 @@ Maven：
 <dependency>
     <groupId>io.github.easy4j</groupId>
     <artifactId>opencv-sdk</artifactId>
-    <version>2.0.x.x.20260630-SNAPSHOT</version>
+    <version>2.0.x.20260630-SNAPSHOT</version>
 </dependency>
 ```
 
 Gradle：
 
 ```groovy
-implementation 'io.github.easy4j:opencv-sdk:2.0.x.x.20260630-SNAPSHOT'
+implementation 'io.github.easy4j:opencv-sdk:2.0.x.20260630-SNAPSHOT'
 ```
 
 快照版本需要启用对应快照仓库（`pom.xml` 中 `distributionManagement` 指向 Aliyun Maven 仓库）。原生二进制由 JavaCPP（`opencv-platform`）按平台解析。
@@ -213,8 +213,8 @@ mvn clean verify
 
 | 分支 | 版本模式 | JDK | 维护策略 |
 |---|---|---|---|
-| `feature/1.0.x`（当前分支） | `1.0.x.*` | 8 | 仅接受兼容性修复与 JDK 8 安全的依赖升级 |
-| `feature/2.0.x` | `2.0.x.*` | 17 | JDK 17 线 |
+| `feature/1.0.x` | `1.0.x.*` | 8 | 仅接受兼容性修复与 JDK 8 安全的依赖升级 |
+| `feature/2.0.x`（当前分支） | `2.0.x.*` | 17 | JDK 17 线 |
 | `feature/3.0.x` | `3.0.x.*` | 21 | JDK 21 线 |
 
 <a id="11-contributing--license"></a>

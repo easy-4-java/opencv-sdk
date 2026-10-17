@@ -8,8 +8,8 @@ OpenCV + DeepLearning4j face detection / recognition toolkit: OpenCV face templa
 [简体中文](./README.zh-CN.md)
 
 > **Current branch**: `feature/2.0.x`
-> **Version**: `2.0.x.x.20260630-SNAPSHOT`
-> **JDK baseline**: 8
+> **Version**: `2.0.x.20260630-SNAPSHOT`
+> **JDK baseline**: 17
 > **Project status**: experimental (initial public version). Not yet published to Maven Central; artifacts are distributed via the Aliyun Maven repository and GitHub Releases.
 
 ## Table of Contents
@@ -30,7 +30,7 @@ OpenCV + DeepLearning4j face detection / recognition toolkit: OpenCV face templa
 
 ### 1.1 What it is
 
-**opencv-sdk** is a Java toolkit bundling OpenCV (via JavaCPP `opencv-platform`) with DeepLearning4j (DL4J): face detection and matching templates over OpenCV, ND4J matrix conversion and storage, plus a FaceNet-small model for face recognition workflows. It targets image-processing and face-recognition features that are commonly used inside Spring Boot applications (the package namespace follows the `org.bytedeco.opencv.spring.boot` convention; the 1.0.x module itself carries no Spring dependency in its POM).
+**opencv-sdk** is a Java toolkit bundling OpenCV (via JavaCPP `opencv-platform`) with DeepLearning4j (DL4J): face detection and matching templates over OpenCV, ND4J matrix conversion and storage, plus a FaceNet-small model for face recognition workflows. It targets image-processing and face-recognition features that are commonly used inside Spring Boot applications (the package namespace follows the `org.bytedeco.opencv.spring.boot` convention; the 2.0.x module itself carries no Spring dependency in its POM).
 
 ### 1.2 What it is not
 
@@ -67,7 +67,7 @@ OpenCV + DeepLearning4j face detection / recognition toolkit: OpenCV face templa
 
 | Component | Version | Notes |
 |---|---:|---|
-| JDK | 17+ | 1.0.x line baseline |
+| JDK | 17+ | 2.0.x line baseline |
 | opencv-platform (JavaCPP) | 4.1.0-1.5.1 | Native OpenCV binaries per platform |
 | DeepLearning4j core / zoo / modelimport | 1.0.0-beta4 | Models and import |
 | ND4J api + native | 1.0.0-beta4 | Matrix ops (`nd4j-native`) |
@@ -81,8 +81,8 @@ Version-line matrix:
 
 | Version line | Branch | JDK | Version pattern | Purpose |
 |---|---|---:|---|---|
-| 1.0.x | `feature/2.0.x` (this branch) | 8 | `1.0.x.*` | Legacy projects, Boot 2.x starter line |
-| 2.0.x | `feature/2.0.x` | 17 | `2.0.x.*` | JDK 17 line |
+| 1.0.x | `feature/1.0.x` | 8 | `1.0.x.*` | Legacy projects, Boot 2.x starter line |
+| 2.0.x | `feature/2.0.x` (this branch) | 17 | `2.0.x.*` | JDK 17 line |
 | 3.0.x | `feature/3.0.x` | 21 | `3.0.x.*` | New projects |
 
 <a id="4-architecture--modules"></a>
@@ -130,14 +130,14 @@ Maven:
 <dependency>
     <groupId>io.github.easy4j</groupId>
     <artifactId>opencv-sdk</artifactId>
-    <version>2.0.x.x.20260630-SNAPSHOT</version>
+    <version>2.0.x.20260630-SNAPSHOT</version>
 </dependency>
 ```
 
 Gradle:
 
 ```groovy
-implementation 'io.github.easy4j:opencv-sdk:2.0.x.x.20260630-SNAPSHOT'
+implementation 'io.github.easy4j:opencv-sdk:2.0.x.20260630-SNAPSHOT'
 ```
 
 Snapshot builds require an enabled snapshot repository (Aliyun Maven snapshot repository per `distributionManagement` in `pom.xml`). Native binaries are resolved per-platform by JavaCPP (`opencv-platform`).
@@ -214,8 +214,8 @@ mvn clean verify
 
 | Branch | Version pattern | JDK | Maintenance policy |
 |---|---|---|---|
-| `feature/1.0.x` (this branch) | `1.0.x.*` | 8 | Compatibility fixes and JDK-8-safe dependency upgrades only |
-| `feature/2.0.x` | `2.0.x.*` | 17 | JDK 17 line |
+| `feature/1.0.x` | `1.0.x.*` | 8 | Compatibility fixes and JDK-8-safe dependency upgrades only |
+| `feature/2.0.x` (this branch) | `2.0.x.*` | 17 | JDK 17 line |
 | `feature/3.0.x` | `3.0.x.*` | 21 | JDK 21 line |
 
 <a id="11-contributing--license"></a>

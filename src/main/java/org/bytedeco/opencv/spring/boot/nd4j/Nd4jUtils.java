@@ -69,7 +69,7 @@ public class Nd4jUtils {
      * tensors.
      *
      * <p>Delegates straight to ND4J's {@link INDArray#distance2(INDArray)}
-     * which is preferred over the plain {@link INDArray#distance(INDArray)}
+     * which is preferred over a plain distance calculation
      * when the caller only needs the relative ordering of distances (such
      * as the {@code < 0.45} threshold used by
      * {@link Nd4jTemplate#match(byte[], byte[])}).</p>
