@@ -34,6 +34,7 @@ import org.junit.jupiter.api.io.TempDir;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -59,6 +60,7 @@ class NativeOpenCvSmokeTest {
         assertFalse(matrix.empty());
         assertEquals(8, matrix.cols());
         assertEquals(6, matrix.rows());
+        assertArrayEquals(new double[] { 0, 0, 255 }, matrix.get(3, 2), 0.0);
 
         IplImage image = opencv_imgcodecs.cvLoadImage(file.getAbsolutePath());
         assertNotNull(image);

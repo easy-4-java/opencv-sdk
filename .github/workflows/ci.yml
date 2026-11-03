@@ -34,6 +34,9 @@ jobs:
           java-version: '17'
           cache: maven
 
+      - name: Install OpenCV native runtime library
+        run: sudo apt-get update && sudo apt-get install -y libgtk2.0-0t64
+
       - name: Build and verify with JaCoCo coverage gate
         run: mvn -B --no-transfer-progress clean verify
 
