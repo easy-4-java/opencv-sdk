@@ -406,6 +406,12 @@
             </activation>
             <dependencies>
                 <dependency>
+                    <groupId>org.bytedeco</groupId>
+                    <artifactId>javacpp</artifactId>
+                    <version>1.5.3</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
                     <groupId>org.nd4j</groupId>
                     <artifactId>nd4j-native-platform</artifactId>
                     <version>${nd4j.version}</version>
