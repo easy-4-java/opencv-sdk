@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 
 import org.bytedeco.opencv.spring.boot.dl4j.FaceNetSmallV2Model;
@@ -108,16 +109,25 @@ class NativeEmbeddingPipelineTest {
                 Nd4j.create(new double[] { 0, 0 }), Nd4j.create(new double[] { 1, 1 }));
 
         Nd4jTemplate template = new Nd4jTemplate(graph, loader, 1, 1);
+        assertEquals(List.of("match"), outcomeLines(captureMatchOutput(template)));
+        assertEquals(List.of("dismatch"), outcomeLines(captureMatchOutput(template)));
+    }
+
+    private static String captureMatchOutput(Nd4jTemplate template) throws Exception {
         PrintStream original = System.out;
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         try (PrintStream capture = new PrintStream(output)) {
             System.setOut(capture);
             template.match(new byte[] { 1 }, new byte[] { 2 });
-            template.match(new byte[] { 1 }, new byte[] { 2 });
         } finally {
             System.setOut(original);
         }
-        assertTrue(output.toString().contains("match"));
-        assertTrue(output.toString().contains("dismatch"));
+        return output.toString();
+    }
+
+    private static List<String> outcomeLines(String output) {
+        return output.lines()
+                .filter(line -> line.equals("match") || line.equals("dismatch"))
+                .toList();
     }
 }
