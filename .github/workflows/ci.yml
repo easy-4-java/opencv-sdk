@@ -5,7 +5,7 @@
 #   - manual workflow_dispatch
 #
 # Runs `mvn -B clean verify` which includes the JaCoCo coverage gate
-# (90% line coverage, haltOnFailure=false) configured in the POM.
+# (90% line coverage) configured in the POM.
 name: CI
 
 on:
@@ -33,6 +33,9 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: maven
+
+      - name: Install OpenCV native runtime library
+        run: sudo apt-get update && sudo apt-get install -y libgtk2.0-0t64
 
       - name: Build and verify with JaCoCo coverage gate
         run: mvn -B --no-transfer-progress clean verify
