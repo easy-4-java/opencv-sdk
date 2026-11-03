@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2018-present, easy-4-java (https://github.com/easy-4-java).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.bytedeco.opencv.spring.boot.nd4j;
 
 import java.io.ByteArrayInputStream;
@@ -16,9 +31,11 @@ import org.deeplearning4j.nn.graph.vertex.GraphVertex;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.junit.jupiter.api.io.TempDir;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
+import org.mockito.ArgumentCaptor;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,6 +49,7 @@ import static org.mockito.Mockito.when;
 
 /** Exercises the image embedding flow with real ND4J arrays on Linux CI. */
 @EnabledOnOs(OS.LINUX)
+@EnabledIfSystemProperty(named = "os.arch", matches = "amd64|x86_64")
 class NativeEmbeddingPipelineTest {
 
     @TempDir
@@ -91,6 +109,14 @@ class NativeEmbeddingPipelineTest {
         assertEquals(127.5, matrix.getDouble(0, 1, 0, 0));
         assertEquals(0.0, matrix.getDouble(0, 2, 0, 0));
         assertArrayEquals(new long[] { 1, 3, 1, 1 }, matrix.shape());
+        ArgumentCaptor<INDArray> graphInputs = ArgumentCaptor.forClass(INDArray.class);
+        verify(graph, org.mockito.Mockito.times(3)).feedForward(graphInputs.capture(), eq(false));
+        for (INDArray input : graphInputs.getAllValues()) {
+            assertArrayEquals(new long[] { 1, 3, 1, 1 }, input.shape());
+            assertEquals(1.0, input.getDouble(0, 0, 0, 0), 1e-10);
+            assertEquals(0.5, input.getDouble(0, 1, 0, 0), 1e-10);
+            assertEquals(0.0, input.getDouble(0, 2, 0, 0), 1e-10);
+        }
         verify(vertex, org.mockito.Mockito.atLeastOnce()).setInputs(dense);
     }
 
