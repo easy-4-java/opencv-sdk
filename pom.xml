@@ -47,7 +47,7 @@
         <datavec.version>1.0.0-beta4</datavec.version>
         <dl4j.version>1.0.0-beta4</dl4j.version>
         <fastjson.version>2.0.62</fastjson.version>
-        <guava.version>30.0-jre</guava.version>
+        <guava.version>33.7.2-jre</guava.version>
         <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <lombok.version>1.18.46</lombok.version>
         <nd4j.version>1.0.0-beta4</nd4j.version>
@@ -60,6 +60,7 @@
         <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+        <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
     </properties>
 
 
@@ -156,6 +157,12 @@
 
     <!-- 项目依赖（dependencies） -->
     <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
         <!-- For Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -255,6 +262,11 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+            </plugin>
 
             <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
             <plugin>
@@ -283,7 +295,7 @@
                             <goal>check</goal>
                         </goals>
                         <configuration>
-                            <haltOnFailure>false</haltOnFailure>
+                            <haltOnFailure>true</haltOnFailure>
                             <rules>
                                 <rule>
                                     <element>BUNDLE</element>
