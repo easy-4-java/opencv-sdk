@@ -48,6 +48,7 @@
         <dl4j.version>1.0.0-beta4</dl4j.version>
         <fastjson.version>2.0.62</fastjson.version>
         <guava.version>33.7.2-jre</guava.version>
+        <javacpp.version>1.5.3</javacpp.version>
         <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <lombok.version>1.18.46</lombok.version>
         <nd4j.version>1.0.0-beta4</nd4j.version>
@@ -68,6 +69,11 @@
     <!-- 依赖版本统一管理（dependencyManagement） -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.bytedeco</groupId>
+                <artifactId>javacpp</artifactId>
+                <version>${javacpp.version}</version>
+            </dependency>
             <!-- For Lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -405,12 +411,6 @@
                 </os>
             </activation>
             <dependencies>
-                <dependency>
-                    <groupId>org.bytedeco</groupId>
-                    <artifactId>javacpp</artifactId>
-                    <version>1.5.3</version>
-                    <scope>test</scope>
-                </dependency>
                 <dependency>
                     <groupId>org.nd4j</groupId>
                     <artifactId>nd4j-native-platform</artifactId>
