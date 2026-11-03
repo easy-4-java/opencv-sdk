@@ -37,7 +37,7 @@ class NativeEmbeddingPipelineTest {
     Path tempDir;
 
     @Test
-    void transposesChannelsAndComputesSquaredDistance() {
+    void transposesChannelsAndComputesDistance() {
         INDArray channels = Nd4j.create(new double[] { 10, 20, 30 }).reshape(1, 3, 1);
         INDArray transposed = Nd4jUtils.transpose(channels, 1, 1);
 
@@ -45,7 +45,7 @@ class NativeEmbeddingPipelineTest {
         assertEquals(30.0, transposed.getDouble(0, 0, 0, 0));
         assertEquals(20.0, transposed.getDouble(0, 1, 0, 0));
         assertEquals(10.0, transposed.getDouble(0, 2, 0, 0));
-        assertEquals(9.0, Nd4jUtils.distance(Nd4j.create(new double[] { 1, 2 }),
+        assertEquals(3.0, Nd4jUtils.distance(Nd4j.create(new double[] { 1, 2 }),
                 Nd4j.create(new double[] { 4, 2 })), 1e-10);
     }
 
